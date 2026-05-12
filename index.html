@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Online Teaching Website</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      background:#f5f5f5;
+      color:#333;
+    }
+
+    /* Navbar */
+    nav{
+      background:#0d47a1;
+      color:white;
+      padding:15px 40px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+
+    nav h1{
+      font-size:28px;
+    }
+
+    nav ul{
+      list-style:none;
+      display:flex;
+      gap:25px;
+    }
+
+    nav ul li a{
+      color:white;
+      text-decoration:none;
+      font-size:18px;
+    }
+
+    nav ul li a:hover{
+      color:yellow;
+    }
+
+    /* Hero */
+    .hero{
+      height:90vh;
+      background:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop') center/cover;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:20px;
+    }
+
+    .hero-content{
+      background:rgba(0,0,0,0.6);
+      padding:40px;
+      border-radius:20px;
+      color:white;
+      max-width:700px;
+    }
+
+    .hero h2{
+      font-size:50px;
+      margin-bottom:20px;
+    }
+
+    .hero p{
+      font-size:20px;
+      margin-bottom:25px;
+    }
+
+    .btn{
+      background:gold;
+      color:black;
+      border:none;
+      padding:14px 30px;
+      font-size:18px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:bold;
+    }
+
+    .btn:hover{
+      background:orange;
+    }
+
+    /* Courses */
+    .courses{
+      padding:80px 40px;
+    }
+
+    .courses h2{
+      text-align:center;
+      margin-bottom:50px;
+      font-size:40px;
+    }
+
+    .course-container{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:30px;
+    }
+
+    .course-card{
+      background:white;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+      transition:0.3s;
+    }
+
+    .course-card:hover{
+      transform:translateY(-10px);
+    }
+
+    .course-card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+    }
+
+    .course-content{
+      padding:20px;
+    }
+
+    .course-content h3{
+      margin-bottom:10px;
+      font-size:28px;
+    }
+
+    .course-content p{
+      margin-bottom:20px;
+      color:#666;
+    }
+
+    .enroll-btn{
+      background:#0d47a1;
+      color:white;
+      border:none;
+      padding:12px 20px;
+      border-radius:10px;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    .enroll-btn:hover{
+      background:#1565c0;
+    }
+
+    /* Features */
+    .features{
+      background:white;
+      padding:80px 40px;
+    }
+
+    .features h2{
+      text-align:center;
+      margin-bottom:50px;
+      font-size:40px;
+    }
+
+    .feature-boxes{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;
+    }
+
+    .feature{
+      background:#f0f0f0;
+      padding:30px;
+      text-align:center;
+      border-radius:20px;
+    }
+
+    .feature h3{
+      margin:15px 0;
+      font-size:25px;
+    }
+
+    /* Contact */
+    .contact{
+      padding:80px 40px;
+    }
+
+    .contact h2{
+      text-align:center;
+      margin-bottom:40px;
+      font-size:40px;
+    }
+
+    .contact-form{
+      background:white;
+      max-width:600px;
+      margin:auto;
+      padding:30px;
+      border-radius:20px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .contact-form input,
+    .contact-form textarea{
+      width:100%;
+      padding:15px;
+      margin-bottom:20px;
+      border:1px solid #ccc;
+      border-radius:10px;
+      font-size:16px;
+    }
+
+    .contact-form button{
+      width:100%;
+      background:#0d47a1;
+      color:white;
+      border:none;
+      padding:15px;
+      border-radius:10px;
+      font-size:18px;
+      cursor:pointer;
+    }
+
+    .contact-form button:hover{
+      background:#1565c0;
+    }
+
+    /* Footer */
+    footer{
+      background:black;
+      color:white;
+      text-align:center;
+      padding:20px;
+    }
+
+    /* Modal */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.6);
+      display:none;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .modal-content{
+      background:white;
+      padding:40px;
+      border-radius:20px;
+      text-align:center;
+      width:90%;
+      max-width:400px;
+    }
+
+    .close-btn{
+      margin-top:20px;
+      background:#0d47a1;
+      color:white;
+      border:none;
+      padding:12px 20px;
+      border-radius:10px;
+      cursor:pointer;
+    }
+
+    @media(max-width:768px){
+      .hero h2{
+        font-size:35px;
+      }
+
+      nav{
+        flex-direction:column;
+        gap:15px;
+      }
+
+      nav ul{
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <h1>StudyWithAmit</h1>
+
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Learn Online With Best Teachers</h2>
+
+      <p>
+        Join live classes, recorded videos, quizzes, and notes.
+      </p>
+
+      <button class="btn" onclick="goToCourses()">
+        Start Learning
+      </button>
+    </div>
+  </section>
+
+  <!-- Courses -->
+  <section class="courses" id="courses">
+
+    <h2>Popular Courses</h2>
+
+    <div class="course-container">
+
+      <div class="course-card">
+        <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="course-content">
+          <h3>Physics</h3>
+
+          <p>Motion, Units, Measurements and more.</p>
+
+          <button class="enroll-btn" onclick="enroll('Physics')">
+            Enroll Now
+          </button>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="course-content">
+          <h3>Chemistry</h3>
+
+          <p>Mole Concept, Atomic Structure and Bonding.</p>
+
+          <button class="enroll-btn" onclick="enroll('Chemistry')">
+            Enroll Now
+          </button>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="course-content">
+          <h3>Mathematics</h3>
+
+          <p>Algebra, Trigonometry and Calculus.</p>
+
+          <button class="enroll-btn" onclick="enroll('Mathematics')">
+            Enroll Now
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+
+    <h2>Why Choose Us?</h2>
+
+    <div class="feature-boxes">
+
+      <div class="feature">
+        <h3>📚 Expert Teachers</h3>
+        <p>Learn from experienced teachers.</p>
+      </div>
+
+      <div class="feature">
+        <h3>🎥 Live Classes</h3>
+        <p>Attend live interactive sessions.</p>
+      </div>
+
+      <div class="feature">
+        <h3>📝 Notes & Tests</h3>
+        <p>Practice with notes and quizzes.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+
+    <h2>Contact Us</h2>
+
+    <div class="contact-form">
+
+      <input type="text" id="name" placeholder="Your Name">
+
+      <input type="email" id="email" placeholder="Your Email">
+
+      <textarea id="message" rows="5" placeholder="Your Message"></textarea>
+
+      <button onclick="sendMessage()">
+        Send Message
+      </button>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 StudyWithAmit. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+
+    <div class="modal-content">
+
+      <h2>Enrollment Successful 🎉</h2>
+
+      <p id="courseName"></p>
+
+      <button class="close-btn" onclick="closeModal()">
+        Close
+      </button>
+
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+
+    function goToCourses() {
+      document
+        .getElementById('courses')
+        .scrollIntoView({
+          behavior: 'smooth'
+        });
+    }
+
+    function enroll(course) {
+
+      document.getElementById('modal').style.display = 'flex';
+
+      document.getElementById('courseName').innerText =
+        'You enrolled in ' + course;
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    function sendMessage() {
+
+      let name = document.getElementById('name').value;
+      let email = document.getElementById('email').value;
+      let message = document.getElementById('message').value;
+
+      if(name === '' || email === '' || message === '') {
+
+        alert('Please fill all fields');
+
+        return;
+      }
+
+      alert('Message Sent Successfully!');
+
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('message').value = '';
+    }
+
+  </script>
+
+</body>
+</html>
