@@ -279,6 +279,21 @@
         flex-direction:column;
         gap:15px;
       }
+      .hero-content{
+ animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+ from{
+   opacity:0;
+   transform:translateY(40px);
+ }
+
+ to{
+   opacity:1;
+   transform:translateY(0);
+ }
+}
 
       nav ul{
         flex-wrap:wrap;
@@ -311,11 +326,21 @@
       </p>
 
       <button class="btn" onclick="goToCourses()">
-        Start Learning
-      </button>
+ Start Learning
+</button>
+
+<button class="btn" onclick="location.href='#contact'">
+ Contact Us
+</button>
+
+<a href="https://wa.me/9792417573">
+  <button class="btn">
+    Join WhatsApp
+  </button>
+</a>
     </div>
   </section>
-
+  
   <!-- Courses -->
   <section class="courses" id="courses">
 
@@ -366,10 +391,108 @@
       </div>
 
     </div>
-  </section>
+  </section> 
+ <section class="courses">
+
+<h2>Recorded Video Classes</h2>
+
+<div class="course-container">
+
+<div class="course-card">
+
+<video width="100%" controls>
+<source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+Your browser does not support video.
+</video>
+
+<div class="course-content">
+<h3>Class 11 Physics</h3>
+<p>Units and Measurements Full Lecture</p>
+</div>
+
+</div>
+
+<div class="course-card">
+
+<video width="100%" controls>
+<source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+Your browser does not support video.
+</video>
+
+<div class="course-content">
+<h3>Chemistry</h3>
+<p>Mole Concept Lecture</p>
+</div>
+
+</div>
+
+</div>
+</section>
+<section class="courses">
+
+<h2>🔴 Live Zoom Classes</h2>
+
+<div class="course-container">
+
+<div class="course-card">
+
+<div class="course-content">
+
+<h3>Live Class by Er. Kumar Amit</h3>
+
+
+<a href="https://us05web.zoom.us/j/2359384779" target="_blank">
+
+<button class="enroll-btn">
+🔴 Join Live Class
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<section class="courses">
+
+<h2>📋 Student Attendance & Fees</h2>
+
+<div class="contact-form">
+
+<input type="text"
+id="studentName"
+placeholder="Student Name">
+
+<input type="date"
+id="attendanceDate">
+
+<select id="studentFees">
+
+<option value="">Select Fee Status</option>
+
+<option>Paid ✅</option>
+
+<option>Pending ❌</option>
+
+<option>Half Paid ⚠️</option>
+
+</select>
+
+<button onclick="markAttendance()">
+Mark Attendance
+</button>
+
+<p id="attendanceMsg"></p>
+
+</div>
+
+</section>
+
 
   <!-- Features -->
-  <section class="features">
 
     <h2>Why Choose Us?</h2>
 
@@ -457,25 +580,35 @@
       document.getElementById('modal').style.display = 'none';
     }
 
-    function sendMessage() {
+    function sendMessage(){
 
-      let name = document.getElementById('name').value;
-      let email = document.getElementById('email').value;
-      let message = document.getElementById('message').value;
+let name=document.getElementById('name').value;
 
-      if(name === '' || email === '' || message === '') {
+let email=document.getElementById('email').value;
 
-        alert('Please fill all fields');
+let message=document.getElementById('message').value;
 
-        return;
-      }
+let pattern=/^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
-      alert('Message Sent Successfully!');
+if(name==''||email==''||message==''){
 
-      document.getElementById('name').value = '';
-      document.getElementById('email').value = '';
-      document.getElementById('message').value = '';
-    }
+alert('Please fill all fields');
+
+return;
+
+}
+
+if(!pattern.test(email)){
+
+alert('Enter valid email');
+
+return;
+
+}
+
+alert('Message Sent Successfully!');
+
+}
 
   </script>
 
