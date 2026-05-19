@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -52,8 +52,7 @@
     }
 
     /* Hero */
-    .hero{
-      height:90vh;
+    .hero{   height:90vh;
       background:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop') center/cover;
       display:flex;
       justify-content:center;
@@ -356,9 +355,9 @@
 
           <p>Motion, Units, Measurements and more.</p>
 
-          <button class="enroll-btn" onclick="enroll('Physics')">
-            Enroll Now
-          </button>
+          <button class="enroll-btn" onclick="buyCourse('Physics',499)">
+Enroll Now ₹499
+</button>
         </div>
       </div>
 
@@ -369,10 +368,10 @@
           <h3>Chemistry</h3>
 
           <p>Mole Concept, Atomic Structure and Bonding.</p>
-
-          <button class="enroll-btn" onclick="enroll('Chemistry')">
-            Enroll Now
-          </button>
+<button class="enroll-btn" onclick="buyCourse('Chemistry',599)">
+Enroll Now ₹599
+</button>
+          
         </div>
       </div>
 
@@ -384,9 +383,9 @@
 
           <p>Algebra, Trigonometry and Calculus.</p>
 
-          <button class="enroll-btn" onclick="enroll('Mathematics')">
-            Enroll Now
-          </button>
+          <button class="enroll-btn" onclick="buyCourse('Mathematics',699)">
+Enroll Now ₹699
+</button>
         </div>
       </div>
 
@@ -493,7 +492,7 @@ Mark Attendance
 
 
   <!-- Features -->
-
+<section class="features">
     <h2>Why Choose Us?</h2>
 
     <div class="feature-boxes">
@@ -535,7 +534,70 @@ Mark Attendance
 
     </div>
   </section>
+<div class="modal" id="paymentModal">
 
+<div class="modal-content">
+<h2>Course Purchase</h2>
+
+<p id="selectedCourse"></p>
+
+<input type="text"
+id="buyerName"
+placeholder="Enter Name">
+
+<input type="number"
+id="buyerPhone"
+placeholder="Mobile Number">
+
+<button onclick="paymentDone()"
+class="enroll-btn">
+I Have Paid ✅
+</button>
+<h3>Scan & Pay</h3>
+
+<img 
+src="APNA_QR_LINK_YAHAN"
+width="220"
+style="border-radius:15px;margin:10px;">
+
+<p>
+PhonePe / GPay / Paytm se scan karein
+</p>
+
+<button onclick="closePayment()"
+class="close-btn">
+Cancel
+<h3>📲 Scan & Pay</h3>
+
+<img
+id="qrImage"
+src="https://raw.githubusercontent.com/amit2aiet-pixel/online-teaching-website/556007d850d0736e21494ecbe7806c6aaf9fd6f2/WhatsApp%20Image%202026-05-19%20at%201.29.00%20AM.jpeg"
+width="220"
+style="
+border-radius:15px;
+margin:10px;
+border:2px solid #ddd;
+padding:8px;
+background:white;
+">
+
+<p>
+Scan using PhonePe / GPay / Paytm
+</p>
+
+<p>
+UPI ID: <b>amit2.aiet-3@okhdfcbank</b>
+</p>
+
+<button onclick="paymentDone()"
+class="enroll-btn">
+I Have Paid ✅
+</button>
+</button>
+
+</div>
+
+</div>
   <!-- Footer -->
   <footer>
     <p>© 2026 StudyWithAmit. All Rights Reserved.</p>
@@ -556,61 +618,117 @@ Mark Attendance
 
     </div>
   </div>
-
-  <!-- JavaScript -->
   <script>
 
-    function goToCourses() {
-      document
-        .getElementById('courses')
-        .scrollIntoView({
-          behavior: 'smooth'
-        });
-    }
+function paymentDone(){
 
-    function enroll(course) {
+let buyerName=
+document.getElementById("buyerName").value;
 
-      document.getElementById('modal').style.display = 'flex';
+let buyerPhone=
+document.getElementById("buyerPhone").value;
 
-      document.getElementById('courseName').innerText =
-        'You enrolled in ' + course;
-    }
-
-    function closeModal() {
-      document.getElementById('modal').style.display = 'none';
-    }
-
-    function sendMessage(){
-
-let name=document.getElementById('name').value;
-
-let email=document.getElementById('email').value;
-
-let message=document.getElementById('message').value;
-
-let pattern=/^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-
-if(name==''||email==''||message==''){
-
-alert('Please fill all fields');
-
+if(
+buyerName=="" ||
+buyerPhone==""
+){
+alert("Please fill details");
 return;
+}
+
+let msg=
+"New Course Purchased 🎉%0A"+
+"Name: "+buyerName+
+"%0APhone: "+buyerPhone+
+"%0ACourse: "+courseTitle+
+"%0AAmount: ₹"+coursePrice;
+
+window.open(
+"https://wa.me/919792417573?text="+msg,
+"_blank"
+);
+
+alert("Payment request sent");
+
+closePayment();
 
 }
 
-if(!pattern.test(email)){
+function closePayment(){
+document.getElementById(
+"paymentModal"
+).style.display="none";
+}
 
-alert('Enter valid email');
 
+let courseTitle="";
+let coursePrice=0;
+
+function goToCourses(){
+document.getElementById("courses")
+.scrollIntoView({
+behavior:"smooth"
+});
+}
+
+function buyCourse(course,price){
+
+courseTitle=course;
+coursePrice=price;
+
+document.getElementById(
+"selectedCourse"
+).innerHTML=
+course+"<br><b>Price ₹"+price+"</b>";
+
+document.getElementById(
+"paymentModal"
+).style.display="flex";
+
+}
+
+function paymentDone(){
+
+let buyerName=
+document.getElementById("buyerName").value;
+
+let buyerPhone=
+document.getElementById("buyerPhone").value;
+
+if(
+buyerName=="" ||
+buyerPhone==""
+){
+alert("Please fill details");
 return;
+}
+
+let msg=
+"New Course Purchased 🎉%0A"+
+"Name: "+buyerName+
+"%0APhone: "+buyerPhone+
+"%0ACourse: "+courseTitle+
+"%0AAmount: ₹"+coursePrice;
+
+window.open(
+"https://wa.me/919792417573?text="+msg,
+"_blank"
+);
+
+alert("Payment request sent");
+
+closePayment();
 
 }
 
-alert('Message Sent Successfully!');
+function closePayment(){
+
+document.getElementById(
+"paymentModal"
+).style.display="none";
 
 }
 
-  </script>
-
+</script>
 </body>
 </html>
